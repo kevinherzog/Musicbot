@@ -18,7 +18,7 @@ console.log(client.commands);
 
 /* Connection Status for console */
 client.once('ready', () => {
-    consol.log('Ready!');
+    console.log('Ready!');
 })
 client.once('reconnecting', () => {
 	console.log('Reconnecting!');
