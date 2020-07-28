@@ -1,5 +1,5 @@
-const ytdl = require("ytdl-core")
-
+const ytdl = require("ytdl-core");
+const yts = require('yt-search');
 module.exports = {
 	name: 'play',
 	aliases: ['start'],
@@ -18,7 +18,12 @@ module.exports = {
                 addSong = args[0];
             }else{
                 let combined = args.join(' ');
-                console.log(combined);
+                yts(combined, function (err, r) {
+                    if (err) throw err;
+
+                    const videos = r.videos;
+                    videos
+                })
             }
             const songInfo = await ytdl.getInfo(addSong);
             const song = {
