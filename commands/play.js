@@ -1,4 +1,4 @@
-const ytdl = require("ytdl-core")
+const ytdl = require("ytdl")
 
 module.exports = {
 	name: 'play',
