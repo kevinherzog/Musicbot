@@ -8,7 +8,7 @@ module.exports = {
             "You need to be in a voice channel to play music!"
           );
         voiceChannel.leave();
-
+        
         bot.destroy();
     }
 };
