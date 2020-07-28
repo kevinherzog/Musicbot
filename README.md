@@ -1,1 +1,3 @@
 # Musicbot
+
+by Kevin Herzog
