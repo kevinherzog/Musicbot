@@ -1,8 +1,7 @@
 module.exports = {
-	name: 'name',
-	aliases: ['alias'],
-	usage: '<state>',
-	description: 'Description',
+	name: 'skip',
+	usage: '<Amount>',
+	description: 'Skip n songs.',
 	execute(message, args){
         console.log('Hey');
     }

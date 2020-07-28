@@ -1,8 +1,7 @@
 module.exports = {
-	name: 'name',
-	aliases: ['alias'],
-	usage: '<state>',
-	description: 'Description',
+	name: 'leave',
+	aliases: ['die'],
+	description: 'Forces bot to leave and clear queue.',
 	execute(message, args){
         console.log('Hey');
     }

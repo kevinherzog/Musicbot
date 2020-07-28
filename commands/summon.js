@@ -1,8 +1,7 @@
 module.exports = {
-	name: 'name',
-	aliases: ['alias'],
-	usage: '<state>',
-	description: 'Description',
+	name: 'summon',
+	aliases: ['join'],
+	description: 'Summon the bot to current VoiceChat.',
 	execute(message, args){
         console.log('Hey');
     }

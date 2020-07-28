@@ -1,8 +1,6 @@
 module.exports = {
-	name: 'name',
-	aliases: ['alias'],
-	usage: '<state>',
-	description: 'Description',
+	name: 'queue',
+	description: 'Shows the queue.',
 	execute(message, args){
         console.log('Hey');
     }
