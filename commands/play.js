@@ -11,8 +11,16 @@ module.exports = {
             const serverQueue = message.client.queue.get(message.guild.id);
       
             const voiceChannel = message.member.voice.channel;
-      
-            const songInfo = await ytdl.getInfo(args[0]);
+            
+            var addSong;
+
+            if(args.includes('youtube')){
+                addSong = args[0];
+            }else{
+                let combined = args.join(' ');
+                console.log(combined);
+            }
+            const songInfo = await ytdl.getInfo(addSong);
             const song = {
               title: songInfo.videoDetails.title,
               url: songInfo.videoDetails.video_url
