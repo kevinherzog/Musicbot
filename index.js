@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const Client = require('./client/Client');
 const { prefix, token } = require('./config.json');
 
-const client = new Client();
+var client = new Client();
 client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -55,7 +55,11 @@ client.on('message', message => {
 
     /* Try to execute the command */
 	try {
-		command.execute(message, args);
+		if(commandName == "leave") {
+			command.execute(client, message, args);
+		} else {
+			command.execute(message, args);
+		}
 	} 
 	catch (error) {
 		console.error(error);

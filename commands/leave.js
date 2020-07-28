@@ -1,10 +1,7 @@
-const botClient = require('../client/Client');
-
 module.exports = {
 	name: 'leave',
-	aliases: ['die'],
 	description: 'Forces bot to leave and clear queue.',
-	execute(message, args){
+	execute(bot, message, args){
         const voiceChannel = message.member.voice.channel;
         if (!voiceChannel)
           return message.channel.send(
@@ -12,6 +9,6 @@ module.exports = {
           );
         voiceChannel.leave();
 
-        botClient.destroy();
+        bot.destroy();
     }
 };
