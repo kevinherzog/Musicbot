@@ -7,25 +7,17 @@ module.exports = {
   description: 'Play a song or queue one.',
   async execute(message, args) {
     try {
-      const queue = messageF.client.queue;
+      const queue = message.client.queue;
       const serverQueue = message.client.queue.get(message.guild.id);
 
       const voiceChannel = message.member.voice.channel;
 
-      var addSong;
+      var combined = args.join(' ');
+          console.log('Is this undefined?');
+          this.whatSong(combined);
+          console.log('Is this undefined?');
 
-      if (args.includes('youtube')) {
-        addSong = args[0];
-      } else {
-        let combined = args.join(' ');
-        yts(combined, function (err, r) {
-          if (err) throw err;
-
-          const videos = r.videos;
-          videos
-        })
-      }
-      const songInfo = await ytdl.getInfo(addSong);
+      const songInfo = ytdl.getInfo(this.whatSong(combined));
       const song = {
         title: songInfo.videoDetails.title,
         url: songInfo.videoDetails.video_url
@@ -87,5 +79,19 @@ module.exports = {
     dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
     serverQueue.textChannel.send(`Start playing: **${song.title}**`);
 
+  },
+
+  whatSong(combined) {
+    var addSong = '';
+      yts(combined, function (err, r) {
+        if (err) throw err;
+        console.log('still defined');
+        let videos = r.videos;
+        console.log(videos[0]);
+        addSong = videos[1].url;
+        console.log(addSong);
+      })
+      return addSong;
   }
+  
 };
