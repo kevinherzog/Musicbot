@@ -1,7 +1,10 @@
 const fs = require('fs');
 const Discord = require('discord.js');
 const Client = require('./client/Client');
-const { prefix, token } = require('./config.json');
+const {
+	prefix,
+	token
+} = require('./config.json');
 
 var client = new Client();
 client.commands = new Discord.Collection();
@@ -9,8 +12,8 @@ client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
-    client.commands.set(command.name, command);
+	const command = require(`./commands/${file}`);
+	client.commands.set(command.name, command);
 }
 
 /* List of Commands for User */
@@ -18,7 +21,7 @@ console.log(client.commands);
 
 /* Connection Status for console */
 client.once('ready', () => {
-    console.log('Ready!');
+	console.log('Ready!');
 })
 client.once('reconnecting', () => {
 	console.log('Reconnecting!');
@@ -29,21 +32,21 @@ client.once('disconnect', () => {
 
 
 client.on('message', message => {
-    /* Checks if the message is addressed at the bot or if it is send by a bot */
+	/* Checks if the message is addressed at the bot or if it is send by a bot */
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-    /* Splits message into parts, then changes the first toLowerCase and sets it as commandName */
+	/* Splits message into parts, then changes the first toLowerCase and sets it as commandName */
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
 
-    /* Searches if the text matches an alias, if so it sets it to command */
+	/* Searches if the text matches an alias, if so it sets it to command */
 	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-        
-    /* Return if there is no such command */
+
+	/* Return if there is no such command */
 	if (!command) return;
 
 
-    /* Look if command has all needed components (May be removed in the future, if juged to be not needed) */
+	/* Look if command has all needed components (May be removed in the future, if juged to be not needed) */
 	if (command.args && !args.length) {
 		let reply = `You didn't provide any arguments, ${message.author}!`;
 
@@ -51,17 +54,16 @@ client.on('message', message => {
 			reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
 		}
 		return message.channel.send(reply);
-    }
+	}
 
-    /* Try to execute the command */
+	/* Try to execute the command */
 	try {
-		if(commandName == "leave") {
+		if (commandName == "leave") {
 			command.execute(client, message, args);
 		} else {
 			command.execute(message, args);
 		}
-	} 
-	catch (error) {
+	} catch (error) {
 		console.error(error);
 		message.reply('there was an error trying to execute that command!');
 	}
